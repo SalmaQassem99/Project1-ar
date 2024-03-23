@@ -106,7 +106,7 @@ a {
 }
 @media (min-width: 576px) {
   .container {
-    max-width: 35rem;
+    max-width: 33.75rem;
   }
 }
 @media (min-width: 768px) {
@@ -116,12 +116,12 @@ a {
 }
 @media (min-width: 992px) {
   .container {
-    max-width: 50rem;
+    max-width: 60rem;
   }
 }
 @media (min-width: 1200px) {
   .container {
-    max-width: 60rem;
+    max-width: 83.125rem;
   }
 }
 
@@ -177,10 +177,11 @@ a {
 .icon.pause {
   height: 100%;
   position: absolute;
-  left: 0;
+  right: 0;
   top: calc(100vh - 3rem);
   transform: translateY(-100%);
   transition: 0.5s;
+  visibility: hidden;
 }
 
 .game {
@@ -189,13 +190,15 @@ a {
   padding: 1.5rem;
   position: relative;
   overflow-y: auto;
-  background-image: url("../media/images/background.svg");
   background-size: cover;
   background-position: 50% 100%;
+  visibility: hidden;
+  transform-origin: left top;
 }
-.game.hide {
-  animation-name: scaleDown;
-  animation-duration: 0.5s;
+.game.hideGame {
+  animation-name: hideGame;
+  animation-timing-function: linear;
+  animation-duration: 0.7s;
   animation-iteration-count: 1;
 }
 .game .head {
@@ -263,7 +266,7 @@ a {
 .game .cardContainer .card-wrapper .card {
   padding: 1.75rem 1.5rem;
   position: relative;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.8);
   border: none;
   box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
 }
@@ -652,6 +655,14 @@ a {
   }
   100% {
     transform: translateZ(-1px) scaleX(1);
+  }
+}
+@keyframes hideGame {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
   }
 }
 @keyframes scaleDown {

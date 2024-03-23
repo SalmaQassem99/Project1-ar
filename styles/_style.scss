@@ -47,7 +47,7 @@ $gap: 1rem;
   margin-left: auto;
 
   @include mediaQuery($smallScreen_min_width) {
-    max-width: 35rem;
+    max-width: 33.75rem;
   }
 
   @include mediaQuery($medScreen_min_width) {
@@ -55,11 +55,11 @@ $gap: 1rem;
   }
 
   @include mediaQuery($largeScreen_min_width) {
-    max-width: 50rem;
+    max-width: 60rem;
   }
 
   @include mediaQuery($XlargeScreen_min_width) {
-    max-width: 60rem;
+    max-width: 83.125rem;
   }
 }
 
@@ -124,10 +124,11 @@ $gap: 1rem;
   &.pause {
     height: 100%;
     position: absolute;
-    left: 0;
+    right: 0;
     top: calc(100vh - (2 * $padding));
     transform: translateY(-100%);
     transition: 0.5s;
+    visibility: hidden;
   }
 }
 
@@ -137,13 +138,15 @@ $gap: 1rem;
   padding: $padding;
   position: relative;
   overflow-y: auto;
-  background-image: url("../media/images/background.svg");
   background-size: cover;
   background-position: 50% 100%;
+  visibility: hidden;
+  transform-origin: left top;
 
-  &.hide {
-    animation-name: scaleDown;
-    animation-duration: 0.5s;
+  &.hideGame {
+    animation-name: hideGame;
+    animation-timing-function: linear;
+    animation-duration: 0.7s;
     animation-iteration-count: 1;
   }
 
@@ -221,7 +224,7 @@ $gap: 1rem;
       .card {
         padding: 1.75rem 1.5rem;
         position: relative;
-        background-color: $white-1;
+        background-color: $white-5;
         border: none;
         box-shadow: 0 0.25rem 0.25rem 0 $shadow-1;
 
@@ -699,6 +702,16 @@ $gap: 1rem;
 
   100% {
     transform: translateZ(-1px) scaleX(1);
+  }
+}
+
+@keyframes hideGame {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
   }
 }
 

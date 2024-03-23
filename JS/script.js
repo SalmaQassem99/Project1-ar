@@ -1,5 +1,6 @@
 const popupModal = document.querySelector(".popup");
 const popupOverlay = document.querySelector(".pop-overlay");
+const game = document.querySelector(".game");
 const playButton = document.querySelector(".game .card-wrapper .play");
 const cardWrapper = document.querySelector(".game .cardContainer");
 const body = document.querySelector(".body");
@@ -13,8 +14,6 @@ const pictures = document.querySelectorAll(
 const scoreWrapper = document.querySelector(".game .scoreWrapper");
 const score = document.querySelector(".game .scoreItem .score");
 const successModal = document.querySelector(".success-wrapper");
-const closeButton = document.querySelector(".closeModal");
-const overlay = document.querySelector(".overlay");
 const arrows = document.querySelectorAll(".game .body .arrow");
 const pauseButton = document.querySelector(".game .pause.icon");
 const iconsArr = [...arrows, pauseButton];
@@ -43,6 +42,7 @@ playButton.addEventListener("click", () => {
     scoreWrapper.style.visibility = "visible";
     score.textContent = `0/${pictures.length}`;
     body.classList.add("show");
+    pauseButton.style.visibility = "visible";
     silhouettes.forEach((silhouette) => {
       silhouette.classList.add("show");
       silhouette.addEventListener("animationend", () => {
@@ -83,7 +83,6 @@ silhouettes.forEach((silhouette) => {
     const silhouetteId = silhouette.dataset.id;
     console.log(silhouetteId);
     if (pictureId === silhouetteId) {
-      document.querySelector("#correct-audio").play();
       silhouette.classList.add("animate");
       silhouette.addEventListener("animationend", () => {
         silhouette.classList.remove("animate");
@@ -106,17 +105,19 @@ silhouettes.forEach((silhouette) => {
           "--width",
           `${(100 / silhouettes.length) * counter}%`
         );
-      if (counter === silhouettes.length) {
-        const text = document.querySelector(".text-card .score-text");
-        text.textContent = `${counter}/${silhouettes.length}`;
-        text.setAttribute("text", `${counter}/${silhouettes.length}`);
-        successModal.style.visibility = "visible";
-        overlay.classList.add("show");
-        successModal.classList.add("show");
-        setTimeout(() => {
+      const audio = document.querySelector("#correct-audio");
+      audio.play();
+      audio.addEventListener("ended", () => {
+        if (counter === silhouettes.length) {
+          const text = document.querySelector(".text-card .score-text");
+          text.textContent = `${counter}/${silhouettes.length}`;
+          text.setAttribute("text", `${counter}/${silhouettes.length}`);
+          successModal.style.visibility = "visible";
+          overlay.classList.add("show");
+          successModal.classList.add("show");
           document.querySelector(`audio[id="success"]`).play();
-        }, 500);
-      }
+        }
+      });
     } else {
       const pictureElement = document.querySelector(
         `.picture[data-id="${pictureId}"] img`
@@ -128,31 +129,6 @@ silhouettes.forEach((silhouette) => {
       });
     }
   });
-});
-successModal.addEventListener("animationend", () => {
-  successModal.classList.remove("show");
-  successModal.classList.remove("hide");
-});
-const addCloseAnimation = () => {
-  closeButton.classList.add("animate");
-  closeButton.addEventListener("animationend", () => {
-    closeButton.classList.remove("animate");
-  });
-  successModal.classList.add("hide");
-  successModal.style.visibility = "hidden";
-  overlay.classList.remove("show");
-};
-document.addEventListener("click", function (event) {
-  const isVisible =
-    window.getComputedStyle(successModal).visibility === "visible";
-  var isClickInside =
-    successModal.contains(event.target) || event.target === closeButton;
-  if (!isClickInside && isVisible) {
-    addCloseAnimation();
-  }
-});
-closeButton.addEventListener("click", () => {
-  addCloseAnimation();
 });
 const hideItems = () => {
   iconsArr.forEach((item) => {
@@ -170,7 +146,8 @@ const resetTimer = () => {
 document.addEventListener("mousemove", resetTimer);
 document.addEventListener("touchstart", resetTimer);
 const checkScreen = () => {
-  const isMobile = window.innerWidth < 768;
+  const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+  const isMobile = window.innerWidth < 768 && isPortrait;
   return isMobile;
 };
 window.addEventListener("load", () => {
@@ -179,6 +156,8 @@ window.addEventListener("load", () => {
   if (is_mobile) {
     popupModal.style.visibility = "visible";
     popupOverlay.style.visibility = "visible";
+  } else {
+    game.style.visibility = "visible";
   }
   silhouettes.forEach((silhouette) => {
     silhouette.style.animationDelay = `${i * 0.2}s`;
@@ -190,7 +169,6 @@ window.addEventListener("load", () => {
     i++;
   });
 });
-
 document.addEventListener("contextmenu", function (event) {
   var target = event.target;
   if (target.tagName === "IMG") {
@@ -200,13 +178,17 @@ document.addEventListener("contextmenu", function (event) {
 });
 window.addEventListener("orientationchange", function () {
   const is_mobile = checkScreen();
-  if (is_mobile) {
-    if (window.orientation === 90 || window.orientation === -90) {
+  if (window.orientation === 90 || window.orientation === -90) {
+    if (is_mobile) {
+      game.style.visibility = "visible";
       popupModal.style.visibility = "hidden";
       popupOverlay.style.visibility = "hidden";
     } else {
       popupModal.style.visibility = "visible";
       popupOverlay.style.visibility = "visible";
     }
+  } else {
+    popupModal.style.visibility = "visible";
+    popupOverlay.style.visibility = "visible";
   }
 });
