@@ -129,6 +129,11 @@ $gap: 1rem;
     transform: translateY(-100%);
     transition: 0.5s;
     visibility: hidden;
+    .fa-solid {
+      &.hide {
+        display: none;
+      }
+    }
   }
 }
 

@@ -62,6 +62,12 @@ playButton.addEventListener("click", () => {
     });
   });
 });
+pauseButton.addEventListener("click", () => {
+  const hiddenIcon = pauseButton.querySelector("i.hide");
+  const shownIcon = pauseButton.querySelector("i:not(.hide)");
+  hiddenIcon.classList.remove("hide");
+  shownIcon.classList.add("hide");
+});
 pictures.forEach((picture) => {
   picture.addEventListener("dragstart", (event) => {
     event.stopPropagation();

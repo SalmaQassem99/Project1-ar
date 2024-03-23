@@ -183,6 +183,9 @@ a {
   transition: 0.5s;
   visibility: hidden;
 }
+.icon.pause .fa-solid.hide {
+  display: none;
+}
 
 .game {
   width: 100vw;
