@@ -493,7 +493,7 @@ a {
   border-radius: 0.3125rem;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
-  animation-name: rotate;
+  animation-name: rotatePhone;
   animation-duration: 2s;
 }
 .popup .phone::after {
@@ -571,7 +571,7 @@ a {
   font-size: 115%;
 }
 .success-wrapper .success-card .closeModal.animate .fa-solid {
-  animation-name: rotatePhone;
+  animation-name: rotate;
   animation-duration: 0.5s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: 1;
@@ -719,14 +719,6 @@ a {
     transform: translate(-50%, -50%) scale(0);
   }
 }
-@keyframes rotatePhone {
-  0% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 @keyframes vibrate {
   0% {
     transform: rotate(-15deg);
@@ -742,6 +734,14 @@ a {
   }
 }
 @keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotatePhone {
   0%, 10% {
     transform: rotate(0deg);
   }
