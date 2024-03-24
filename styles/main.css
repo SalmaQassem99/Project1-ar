@@ -196,7 +196,7 @@ a {
   background-size: cover;
   background-position: 50% 100%;
   visibility: hidden;
-  transform-origin: left top;
+  transform-origin: right top;
 }
 .game.hideGame {
   animation-name: hideGame;
