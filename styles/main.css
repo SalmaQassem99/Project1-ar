@@ -571,7 +571,7 @@ a {
   font-size: 115%;
 }
 .success-wrapper .success-card .closeModal.animate .fa-solid {
-  animation-name: rotate;
+  animation-name: rotatePhone;
   animation-duration: 0.5s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: 1;
@@ -719,7 +719,7 @@ a {
     transform: translate(-50%, -50%) scale(0);
   }
 }
-@keyframes rotate {
+@keyframes rotatePhone {
   0% {
     transform: rotate(0);
   }

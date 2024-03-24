@@ -593,7 +593,7 @@ $gap: 1rem;
 
       &.animate {
         .fa-solid {
-          animation-name: rotate;
+          animation-name: rotatePhone;
           animation-duration: 0.5s;
           animation-timing-function: ease-in-out;
           animation-iteration-count: 1;
@@ -784,7 +784,7 @@ $gap: 1rem;
   }
 }
 
-@keyframes rotate {
+@keyframes rotatePhone {
   0% {
     transform: rotate(0);
   }
